@@ -12,7 +12,11 @@ let package = Package(
         // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
-        .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0")
+        .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
+        
+//        .package(url: "https://github.com/apple/swift-openapi-generator", from: "1.6.0"),
+//        .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.7.0"),
+//        .package(url: "https://github.com/swift-server/swift-openapi-vapor", from: "1.0.0"),
 
     ],
     targets: [
@@ -23,10 +27,15 @@ let package = Package(
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
                 .product(name: "Fluent", package: "fluent"),
-                .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver")
+                .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
+//                .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+//                .product(name: "OpenAPIVapor", package: "swift-openapi-vapor"),
 
             ],
-            swiftSettings: swiftSettings
+            swiftSettings: swiftSettings,
+//            plugins: [
+//                .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
+//            ],
         ),
         .testTarget(
             name: "helloTests",

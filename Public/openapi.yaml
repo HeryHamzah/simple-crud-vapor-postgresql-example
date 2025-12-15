@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: Books API
+  description: API untuk manajemen buku
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /books:
+    get:
+      summary: Get list of books
+      security:
+        - bearerAuth: []
+      tags: [Books]
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum:
+              - programming
+              - mobile
+              - backend
+              - computer
+              - architecture
+              - uiux
+              - advanced
+              - functional
+              - clean
+              - concurrency
+        - in: query
+          name: year
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+
+    post:
+      summary: Create new book
+      security:
+        - bearerAuth: []
+      tags: [Books]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookInput"
+      responses:
+        "200":
+          description: Book created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+
+  /books/{id}:
+    get:
+      summary: Get book by ID
+      security:
+        - bearerAuth: []
+      tags: [Books]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Book detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+
+    put:
+      summary: Update book
+      security:
+        - bearerAuth: []
+      tags: [Books]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookUpdate"
+      responses:
+        "200":
+          description: Book updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+
+    delete:
+      summary: Delete book
+      security:
+        - bearerAuth: []
+      tags: [Books]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Book deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        price:
+          type: integer
+        type:
+          type: string
+        year:
+          type: integer
+
+    BookInput:
+      type: object
+      required: [name, price, type, year]
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+        type:
+          type: string
+        year:
+          type: integer
+
+    BookUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+        type:
+          type: string
+        year:
+          type: integer
