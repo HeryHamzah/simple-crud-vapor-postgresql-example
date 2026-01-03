@@ -3,15 +3,9 @@ import Vapor
 
 func routes(_ app: Application) throws {
     
-    try app.register(collection: BooksController())
-
-    app.get { req async in
-        "It works!"
-    }
+    try app.register(collection: AuthController())
     
-    app.get("hello") { req async -> String in
-        "Hello, world!"
-    }
+    try app.register(collection: BooksController())
    
     
 }

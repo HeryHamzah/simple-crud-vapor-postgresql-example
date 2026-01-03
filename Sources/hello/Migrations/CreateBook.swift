@@ -7,7 +7,7 @@
 
 import Fluent
 
-struct MyMigration: AsyncMigration {
+struct CreateBook: AsyncMigration {
     func revert(on database: any FluentKit.Database) async throws {
        try await database.schema("books")
             .delete()

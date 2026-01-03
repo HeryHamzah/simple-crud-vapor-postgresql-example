@@ -13,6 +13,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
+        .package(url: "https://github.com/vapor/jwt.git", from: "5.0.0")
         
 //        .package(url: "https://github.com/apple/swift-openapi-generator", from: "1.6.0"),
 //        .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.7.0"),
@@ -28,6 +29,7 @@ let package = Package(
                 .product(name: "NIOPosix", package: "swift-nio"),
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
+                .product(name: "JWT", package: "jwt")
 //                .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
 //                .product(name: "OpenAPIVapor", package: "swift-openapi-vapor"),
 
